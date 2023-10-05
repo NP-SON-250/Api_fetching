@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>placeholder Json with API fetch</title>
+        
+    </head>
+
+    <body>
+        <button onclick="request()">Request Data</button>
+        
+        <div id="result"></div>
+    </body>
+    <script>
+        function request(){
+            fetch("https://jsonplaceholder.typicode.com/todos")
+            .then(function(response){
+                return response.json()
+            })
+            .then((response)=> {
+                var result = document.getElementById('result')
+                console.log(response)
+                let html
+                response.forEach(element => {
+
+                    html+=`
+                    <div class="container">
+                        <p style="color: black; text-align: center;"> </p>
+                       <p > User Id: ${element.userId}</p>
+                       <p > Id: ${element.id}</p>
+                       <p > Title: ${element.title}</p>
+                       <p > Completed: ${element.completed}</p>
+                        </div>`
+                  
+                    
+                });
+                result.innerHTML=html
+        
+            })
+        }
+    </script>
+    <style>
+        body{
+            background: #686c8a;
+            width: 95%;
+        }
+        body button{
+            width: 20%;
+            height: 20px;
+            background: #5b63a0;
+            color: white;
+            border: 2px solid black;
+            border-radius: 5px;
+            margin-left: 30rem;
+            margin-top: 10px;
+
+        }
+        body button:hover{
+            background: white;
+            color: #5b63a0;
+            
+        }
+        .container{
+            display: flex;
+            flex-wrap: wrap;
+            column-gap: 40px;
+            border: 2px solid #4b2a53;
+            border-radius: 5px;
+            margin: 100px;
+            padding-top: 20px;
+        }
+    </style>
+</html>
